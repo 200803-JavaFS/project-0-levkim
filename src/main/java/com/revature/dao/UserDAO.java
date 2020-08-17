@@ -11,6 +11,7 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.revature.models.Account;
 import com.revature.models.User;
 import com.revature.utilities.ConnectUtil;
 
@@ -237,6 +238,36 @@ public class UserDAO implements UserDAOImpl {
 		}
 		
 		return false;
+	}
+
+	@Override
+	public List<Account> findAccounts(Account a) {
+		try (Connection conn = ConnectUtil.getConnection()) {
+			
+			String sql = "SELECT * FROM accounts WHERE user_id_fk =" + a.getUserId() + ";";
+			Statement stmt = conn.createStatement();
+			List<Account> accts = new ArrayList<>(); 
+			ResultSet rs = stmt.executeQuery(sql);
+			
+			while (rs.next()) {
+				User u = new User(rs.getInt("user_id_fk"));
+				a = new Account(rs.getInt("account_id"),
+						rs.getString("account_type"),
+						rs.getDouble("balance"),
+						rs.getString("status"),
+						u);
+				
+				accts.add(a);
+			}
+			
+			return accts;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			log.warn("failed to search account by user id!");
+		}
+		
+		return null;
 	}
 
 }

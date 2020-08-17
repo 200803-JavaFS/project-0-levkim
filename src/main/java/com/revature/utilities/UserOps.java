@@ -7,6 +7,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.revature.dao.UserDAO;
 import com.revature.dao.UserDAOImpl;
+import com.revature.models.Account;
 import com.revature.models.User;
 
 public class UserOps {
@@ -16,12 +17,19 @@ public class UserOps {
 	
 	public List<User> findAll() {
 		log.info("searching for all users...");
-		return dao.findAll();
+		List<User> list = dao.findAll();
+		return list;
 	}
 	
 	public List<User> findByType(String type) {
 		log.info("searching for all users by type " + type);
 		return dao.findByType(type);
+	}
+	
+	public List<Account> findAccounts(Account a) {
+		log.info("searching for all accounts");
+		List<Account> list = dao.findAccounts(a);
+		return list;
 	}
 	
 	public User findById(int id) {
@@ -36,7 +44,10 @@ public class UserOps {
 	
 	public boolean findByUserPass(String user, String pass) {
 		log.info("searching for user " + user);
-		return dao.findByUserPass(user, pass);
+		if (dao.findByUserPass(user, pass)) {
+			return true;
+		}
+		return false;
 	}
 	
 	public boolean addUser(User u) {

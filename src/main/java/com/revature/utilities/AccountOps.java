@@ -20,17 +20,20 @@ public class AccountOps {
 	
 	public List<Account> findAll() {
 		log.info("searching for all accounts...");
-		return dao.findAll();
+		List<Account> list = dao.findAll();
+		return list;
 	}
 	
-	public List<Account> findByUser(int userId) {
-		log.info("searching for all accounts with user id " + userId + "...");
-		return dao.findByUser(userId);
+	public List<Account> findByUser(User u) {
+		log.info("searching for all accounts with user id " + u + "...");
+		List<Account> list = dao.findByUser(u);
+		return list;
 	}
 	
 	public List<Account> findByStatus(String status) {
 		log.info("searching for all accounts with status " + status + "...");
-		return dao.findByStatus(status);
+		List<Account> list = dao.findByStatus(status);
+		return list;
 	}
 	
 	public Account findById(int id) {
@@ -90,6 +93,16 @@ public class AccountOps {
 			return true;
 		}
 		return false;
+	}
+	
+	public boolean updateFunds(double fund, int id) {
+		log.info("updating balance in account id " + id);
+		return dao.updateFunds(fund, id);
+	}
+	
+	public boolean transferFunds(int original, int target, double fund) {
+		log.info("transferring funds from account id " + original + " to account id " + target);
+		return dao.transferFunds(original, target, fund);
 	}
 
 }

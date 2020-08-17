@@ -2,12 +2,14 @@ package com.revature.dao;
 
 import java.util.List;
 
+import com.revature.models.Account;
 import com.revature.models.User;
 
 public interface UserDAOImpl {
 	
 	public List<User> findAll();
 	public List<User> findByType(String type);
+	public List<Account> findAccounts(Account a);
 	public User findById(int id);
 	public User findByUser(String user);
 	public boolean findByUserPass(String user, String pass);

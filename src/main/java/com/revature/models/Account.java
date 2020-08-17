@@ -21,6 +21,13 @@ public class Account implements Serializable {
 		this.accountId = accountId;
 	}
 	
+	public Account(String type, double balance, User userId) {
+		super();
+		this.type = type;
+		this.balance = balance;
+		this.userId = userId;
+	}
+	
 	public Account(int accountId, String type, double balance) {
 		super();
 		this.accountId = accountId;
@@ -60,7 +67,7 @@ public class Account implements Serializable {
 		return balance;
 	}
 
-	public void setBalance(int balance) {
+	public void setBalance(double balance) {
 		if (this.balance < 0) {}
 		else { this.balance = balance; }
 	}

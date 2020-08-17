@@ -51,22 +51,22 @@ public class AccountDAO implements AccountDAOImpl {
 	}
 	
 	@Override
-	public List<Account> findByUser(int userId) {
+	public List<Account> findByUser(User u) {
 		
 		try (Connection conn = ConnectUtil.getConnection()) {
 			
-			String sql = "SELECT * FROM accounts WHERE user_id_fk =" + userId + ";";
+			String sql = "SELECT * FROM accounts WHERE user_id_fk =" + u.getUserId() + ";";
 			Statement stmt = conn.createStatement();
 			List<Account> accts = new ArrayList<>(); 
 			ResultSet rs = stmt.executeQuery(sql);
 			
 			while (rs.next()) {
-				User u = new User(rs.getInt("user_id_fk"));
+				User ua = new User(rs.getInt("user_id_fk"));
 				Account a = new Account(rs.getInt("account_id"),
 						rs.getString("account_type"),
 						rs.getDouble("balance"),
 						rs.getString("status"),
-						u);
+						ua);
 				
 				accts.add(a);
 			}
@@ -145,14 +145,12 @@ public class AccountDAO implements AccountDAOImpl {
 			
 			String sql = "BEGIN TRANSACTION;"
 					+ "INSERT INTO accounts (account_type, balance, status, user_id_fk) "
-					+ "VALUES (?, ?, ?, ?);"
+					+ "VALUES (?, 0.0, 'pending', ?);"
 					+ "COMMIT;";
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			User u = new User();
 			
 			int index = 0;
-			stmt.setString(++index, a.getType());
-			stmt.setDouble(++index, a.getBalance());
 			stmt.setString(++index, a.getType());
 			stmt.setInt(++index, u.getUserId());
 			
@@ -235,7 +233,7 @@ public class AccountDAO implements AccountDAOImpl {
 	}
 
 	@Override
-	public double updateFunds(double fund, int id) {
+	public boolean updateFunds(double fund, int id) {
 		
 		try (Connection conn = ConnectUtil.getConnection()) {
 			
@@ -249,16 +247,18 @@ public class AccountDAO implements AccountDAOImpl {
 			
 			stmt.execute();
 			
+			return true;
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			log.warn("failed to update balance in account!");
 		}
 		
-		return 0;
+		return false;
 	}
 
 	@Override
-	public double transferFunds(int original, int target, double fund) {
+	public boolean transferFunds(int original, int target, double fund) {
 		
 		try (Connection conn = ConnectUtil.getConnection()) {
 			
@@ -273,17 +273,19 @@ public class AccountDAO implements AccountDAOImpl {
 			
 			stmt.execute();
 			
+			return true;
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			log.warn("failed to transfer funds!");
 		}
 		
-		return 0;
+		return false;
 	}
 
 	@Override
 	public boolean addAccountWithUser(Account a) {
-try (Connection conn = ConnectUtil.getConnection()) {
+		try (Connection conn = ConnectUtil.getConnection()) {
 			
 			String sql = "BEGIN TRANSACTION;"
 					+ "INSERT INTO accounts (account_type, balance, status, user_id_fk) "
