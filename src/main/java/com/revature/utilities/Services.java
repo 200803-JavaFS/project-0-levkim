@@ -38,8 +38,7 @@ public class Services {
 			register();
 			break;
 		case "X":
-			System.out.println("Thank you for visiting the Beluga Bank! Happy swimming! :)");
-			scan.close();
+			logout();
 			break;
 		default:
 			System.out.println("Whoops! Wrong command. Please try again!");
@@ -258,8 +257,7 @@ public class Services {
 			}
 			break;
 		case "X":
-			System.out.println("Thank you for visiting the Beluga Bank! Happy swimming! :)");
-			scan.close();
+			logout();
 			break;
 		default:
 			System.out.println("Whoops! Wrong command. Please try again!");
@@ -578,8 +576,7 @@ public class Services {
 			admin();
 			break;
 		case "X":
-			System.out.println("Thank you for visiting the Beluga Bank! Happy swimming! :)");
-			scan.close();
+			logout();
 			break;
 		default:
 			System.out.println("Whoops! Wrong command. Please try again!");
@@ -666,7 +663,7 @@ public class Services {
 				} else {
 					log.warn("account does not exist!");
 					System.out.println("Check your spelling and try again.");
-					admin();
+					employee();
 					break;
 				}
 			} catch (Exception e) {
@@ -687,7 +684,7 @@ public class Services {
 				} else {
 					log.warn("user does not exist!");
 					System.out.println("Check your spelling and try again.");
-					admin();
+					employee();
 					break;
 				}
 			} catch (Exception e) {
@@ -697,13 +694,41 @@ public class Services {
 			employee();
 			break;
 		case "X":
-			System.out.println("Thank you for visiting the Beluga Bank! Happy swimming! :)");
-			scan.close();
+			logout();
 			break;
 		default:
 			System.out.println("Whoops! Wrong command. Please try again!");
 			employee();
 			break;
+		}
+	}
+
+	private void logout() {
+		System.out.println("Are you sure you want to log out?");
+		System.out.println("[Y] / [N]");
+		String confirm = scan.nextLine();
+		confirm = confirm.toUpperCase();
+		
+		if (confirm.equals("Y")) {
+			log.info("logging user out...");
+			System.out.println("Thank you for visiting the Beluga Bank! Happy swimming! :)");
+			scan.close();
+		} else if (confirm.equals("N")) {
+			System.out.println("Would you like to return to  Welcome Screen to log in as another user or register?");
+			System.out.println("[Y] / [N]");
+			String confirm2 = scan.nextLine();
+			confirm2 = confirm2.toUpperCase();
+			if (confirm.equals("Y")) {
+				login();
+			} else if (confirm.equals("N")) {
+				logout();
+			} else {
+				System.out.println("Whoops! Wrong command. Please try again!");
+				logout();
+			}
+		} else {
+			System.out.println("Whoops! Wrong command. Please try again!");
+			logout();
 		}
 	}
 

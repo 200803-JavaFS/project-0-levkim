@@ -171,7 +171,7 @@ public class AccountDAO implements AccountDAOImpl {
 		try (Connection conn = ConnectUtil.getConnection()) {
 			
 			String sql = "BEGIN TRANSACTION;"
-					+ "UPDATE accounts SET account_status = 'open' WHERE account_id = ?;"
+					+ "UPDATE accounts SET status = 'open' WHERE account_id = ?;"
 					+ "COMMIT;";
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			
@@ -195,7 +195,7 @@ public class AccountDAO implements AccountDAOImpl {
 		try (Connection conn = ConnectUtil.getConnection()) {
 			
 			String sql = "BEGIN TRANSACTION;"
-					+ "UPDATE accounts SET account_status = 'denied' WHERE account_id = ?;"
+					+ "UPDATE accounts SET status = 'denied' WHERE account_id = ?;"
 					+ "COMMIT;";
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			

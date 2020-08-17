@@ -139,7 +139,7 @@ public class Account implements Serializable {
 				+ "Type: " + type + "\n "
 				+ "Status: " + status + "\n"
 				+ "Current Balance: " + balance + "\n"
-				+ "Owner ID: " + userId.getUserId() + "]";
+				+ "Owner ID: " + userId + "]";
 	}
 
 }
