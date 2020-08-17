@@ -1,26 +1,41 @@
 package com.revature.models;
 
-public class Account {
+import java.io.Serializable;
+
+public class Account implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	
 	private int accountId;
-	private int userId;
 	private String type;
+	private String status;
 	private double balance;
+	private User userId;
 	
 	public Account() {
 		super();
 	}
 	
-	public Account(int accountId, String type, int balance) {
+	public Account(int accountId) {
 		super();
-		setAccountId(accountId);
-		setType(type);
-		setBalance(balance);
+		this.accountId = accountId;
 	}
 	
-	public Account(int accountId, String type, int balance, int userId) {
+	public Account(int accountId, String type, double balance) {
+		super();
+		this.accountId = accountId;
+		this.type = type;
+		this.balance = balance;
+	}
+	
+	public Account(int accountId, String type, double balance, String status) {
 		this(accountId, type, balance);
-		setUserId(userId);
+		this.status = status;
+	}
+	
+	public Account(int accountId, String type, double balance, String status, User userId) {
+		this(accountId, type, balance, status);
+		this.userId = userId;
 	}
 
 	public int getAccountId() {
@@ -50,13 +65,74 @@ public class Account {
 		else { this.balance = balance; }
 	}
 
-	public int getUserId() {
+	public User getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
-		if (this.userId < 0) {}
-		else { this.userId = userId; }
+	public void setUserId(User userId) {
+		this.userId = userId;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + accountId;
+		long temp;
+		temp = Double.doubleToLongBits(balance);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + ((status == null) ? 0 : status.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Account other = (Account) obj;
+		if (accountId != other.accountId)
+			return false;
+		if (Double.doubleToLongBits(balance) != Double.doubleToLongBits(other.balance))
+			return false;
+		if (status == null) {
+			if (other.status != null)
+				return false;
+		} else if (!status.equals(other.status))
+			return false;
+		if (type == null) {
+			if (other.type != null)
+				return false;
+		} else if (!type.equals(other.type))
+			return false;
+		if (userId == null) {
+			if (other.userId != null)
+				return false;
+		} else if (!userId.equals(other.userId))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Account #" + accountId + " [ \n"
+				+ "Type: " + type + "\n "
+				+ "Status: " + status + "\n"
+				+ "Current Balance: " + balance + "\n"
+				+ "Owner ID: " + userId.getUserId() + "]";
 	}
 
 }

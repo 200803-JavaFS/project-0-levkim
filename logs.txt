@@ -1,0 +1,9 @@
+2020-08-16 20:06:11 INFO  UserMenu:52 - Logging user in...
+2020-08-16 20:06:11 INFO  UserOps:38 - searching for user levvy
+2020-08-16 20:06:12 INFO  UserOps:33 - searching for user levvy
+2020-08-16 20:09:05 INFO  UserOps:33 - searching for user levvy
+2020-08-16 20:09:06 INFO  UserMenu:54 - Logging user in...
+2020-08-16 20:09:06 INFO  UserOps:38 - searching for user levvy
+2020-08-16 20:18:08 INFO  UserOps:33 - searching for user levvy
+2020-08-16 20:18:09 INFO  UserMenu:54 - Logging user in...
+2020-08-16 20:18:09 INFO  UserOps:38 - searching for user levvy
