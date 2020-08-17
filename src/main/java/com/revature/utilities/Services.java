@@ -38,7 +38,7 @@ public class Services {
 			register();
 			break;
 		case "X":
-			logout();
+			System.out.println("Thank you for visiting the Beluga Bank! Happy swimming! :)");
 			break;
 		default:
 			System.out.println("Whoops! Wrong command. Please try again!");
@@ -63,13 +63,13 @@ public class Services {
 				admin();
 			} else if (u.getUserType().equals("employee")) {
 				employee();
+			} else {
+				custPrompt();
 			}
 		} else {
 			System.out.println("Incorrect user/pass combo. Please try again.");
 			login();
 		}
-		
-		custPrompt();
 		
 	}
 
@@ -89,14 +89,15 @@ public class Services {
 		if (userOps.findByUser(user) == null) {
 			u.setUserType("customer");
 			userOps.addUser(u);
+			
+			System.out.println("Welcome, " + user + "!");
+			
+			custPrompt();
 		} else {
 			System.out.println("Someone has already used that username. Please try a different one.");
 			register();
 		}
 		
-		System.out.println("Welcome, " + user + "!");
-		
-		custPrompt();
 	}
 	
 	public void custPrompt() {
@@ -130,7 +131,7 @@ public class Services {
 				System.out.println("How much would you like to deposit in this account?");
 				double balance = scan.nextDouble();
 				scan.nextLine(); 
-				Account a = new Account(type, balance, u);
+				Account a = new Account(type, balance, u.getUserId());
 				
 				log.info("creating account...");
 				
@@ -313,6 +314,7 @@ public class Services {
 						System.out.println("[A] Approve account");
 						System.out.println("[D] Deny account");
 					} 
+					System.out.println("[S] Update owner of account");
 					System.out.println("[U] Update balance");
 					System.out.println("[T] Transfer balance");
 					System.out.println("[C] Close account");
@@ -322,7 +324,6 @@ public class Services {
 					switch (achoice) {
 					case "A":
 						if (a.getStatus().equals("pending")) {
-							acctOps.approveAccount(a);
 							if (acctOps.approveAccount(a)) {
 								System.out.println("Account has been approved!");
 							}
@@ -333,7 +334,6 @@ public class Services {
 						break;
 					case "D":
 						if (a.getStatus().equals("pending")) {
-							acctOps.denyAccount(a);
 							if (acctOps.denyAccount(a)) {
 								System.out.println("Account has been denied.");
 							}
@@ -341,6 +341,19 @@ public class Services {
 							System.out.println("This account is no longer pending! Please pick another option");
 						}
 						admin();
+						break;
+					case "S":
+						System.out.println("Input the id of the user you would like to attach this account to.");
+						int user = scan.nextInt();
+						scan.nextLine();
+						a.setUserId(user);
+						
+						if (acctOps.updateAccount(a)) {
+							System.out.println("successfully updated account with new owner!");
+						} else {
+							log.warn("something went wrong with updating account with new owner.");
+						}
+						
 						break;
 					case "U":
 						System.out.println("Would you like to deposit [D] or withdraw [W]?");
@@ -430,7 +443,6 @@ public class Services {
 						confirm = confirm.toLowerCase();
 						
 						if (a != null && confirm.equals("yes")) {
-							acctOps.closeAccount(a.getAccountId());
 							if (acctOps.closeAccount(a.getAccountId())) {
 								System.out.println("account successfully closed.");
 							} else {
@@ -494,7 +506,8 @@ public class Services {
 							userType = userType.toLowerCase();
 							
 							u.setUserType(userType);
-							u = new User(userType, u.getFname(), u.getLname());
+							u.getFname();
+							u.getLname();
 							
 							userOps.updateUser(u);
 							if (userOps.updateUser(u)) {
@@ -508,8 +521,10 @@ public class Services {
 						case "F":
 							System.out.println("What would you like to change the user's first name to?");
 							String uFname = scan.nextLine();
+							
+							u.getUserType();
 							u.setFname(uFname);
-							u = new User(u.getUserType(), uFname, u.getLname());
+							u.getLname();
 							
 							userOps.updateUser(u);
 							if (userOps.updateUser(u)) {
@@ -523,12 +538,14 @@ public class Services {
 						case "L":
 							System.out.println("What would you like to change the user's last name to?");
 							String uLname = scan.nextLine();
+							
+							u.getUserType();
+							u.getFname();
 							u.setLname(uLname);
-							u = new User(u.getUserType(), u.getFname(), uLname);
 							
 							userOps.updateUser(u);
 							if (userOps.updateUser(u)) {
-								System.out.println("successfully updated user's first name!");
+								System.out.println("successfully updated user's last name!");
 								System.out.println(u);
 							} else {
 								log.warn("something went wrong while updating user's last name.");
@@ -712,19 +729,15 @@ public class Services {
 		if (confirm.equals("Y")) {
 			log.info("logging user out...");
 			System.out.println("Thank you for visiting the Beluga Bank! Happy swimming! :)");
-			scan.close();
+			login();
 		} else if (confirm.equals("N")) {
-			System.out.println("Would you like to return to  Welcome Screen to log in as another user or register?");
-			System.out.println("[Y] / [N]");
-			String confirm2 = scan.nextLine();
-			confirm2 = confirm2.toUpperCase();
-			if (confirm.equals("Y")) {
-				login();
-			} else if (confirm.equals("N")) {
-				logout();
+			System.out.println("Sending you back to the previous menu...");
+			if (u.getUserType().equals("admin")) {
+				admin();
+			} else if (u.getUserType().equals("employee")) {
+				employee();
 			} else {
-				System.out.println("Whoops! Wrong command. Please try again!");
-				logout();
+				custPrompt();
 			}
 		} else {
 			System.out.println("Whoops! Wrong command. Please try again!");

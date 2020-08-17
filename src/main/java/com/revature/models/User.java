@@ -172,11 +172,13 @@ public class User implements Serializable {
 
 	@Override
 	public String toString() {
-		return "User #" + userId + " [ \n"
-				+ "Type: " + userType + "\n"
-				+ "Username: " + user + "\n"
-				+ "First Name: " + fname + "\n"
-				+ "Last Name: " + lname + "]";
+		return "User #" + userId + "\n"
+					+ "   Type: " + userType + "\n"
+					+ "   Username: " + user + "\n"
+					+ "   First Name: " + fname + "\n"
+					+ "   Last Name: " + lname;
 	}
+
+	
 
 }

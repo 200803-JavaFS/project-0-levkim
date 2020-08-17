@@ -10,7 +10,7 @@ public class Account implements Serializable {
 	private String type;
 	private String status;
 	private double balance;
-	private User userId;
+	private int userId;
 	
 	public Account() {
 		super();
@@ -21,7 +21,7 @@ public class Account implements Serializable {
 		this.accountId = accountId;
 	}
 	
-	public Account(String type, double balance, User userId) {
+	public Account(String type, double balance, int userId) {
 		super();
 		this.type = type;
 		this.balance = balance;
@@ -40,7 +40,7 @@ public class Account implements Serializable {
 		this.status = status;
 	}
 	
-	public Account(int accountId, String type, double balance, String status, User userId) {
+	public Account(int accountId, String type, double balance, String status, int userId) {
 		this(accountId, type, balance, status);
 		this.userId = userId;
 	}
@@ -72,12 +72,12 @@ public class Account implements Serializable {
 		else { this.balance = balance; }
 	}
 
-	public User getUserId() {
+	public int getUserId() {
 		return userId;
 	}
 
-	public void setUserId(User userId) {
-		this.userId = userId;
+	public void setUserId(int user) {
+		this.userId = user;
 	}
 
 	public String getStatus() {
@@ -98,7 +98,7 @@ public class Account implements Serializable {
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
-		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
+		result = prime * result + userId;
 		return result;
 	}
 
@@ -125,21 +125,21 @@ public class Account implements Serializable {
 				return false;
 		} else if (!type.equals(other.type))
 			return false;
-		if (userId == null) {
-			if (other.userId != null)
-				return false;
-		} else if (!userId.equals(other.userId))
+		if (userId != other.userId) {
 			return false;
+		}
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Account #" + accountId + " [ \n"
-				+ "Type: " + type + "\n "
-				+ "Status: " + status + "\n"
-				+ "Current Balance: " + balance + "\n"
-				+ "Owner ID: " + userId + "]";
+		return "Account #" + accountId + "\n"
+				+ "   Type: " + type + "\n"
+				+ "   Status: " + status + "\n"
+				+ "   Current Balance: " + balance + "\n"
+				+ "   Owner ID: " + userId;
 	}
+	
+	
 
 }

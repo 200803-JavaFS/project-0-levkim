@@ -250,12 +250,11 @@ public class UserDAO implements UserDAOImpl {
 			ResultSet rs = stmt.executeQuery(sql);
 			
 			while (rs.next()) {
-				User u = new User(rs.getInt("user_id_fk"));
 				a = new Account(rs.getInt("account_id"),
 						rs.getString("account_type"),
 						rs.getDouble("balance"),
 						rs.getString("status"),
-						u);
+						rs.getInt("user_id_fk"));
 				
 				accts.add(a);
 			}

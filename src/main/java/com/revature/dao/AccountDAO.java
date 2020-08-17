@@ -30,12 +30,11 @@ public class AccountDAO implements AccountDAOImpl {
 			ResultSet rs = stmt.executeQuery(sql);
 			
 			while (rs.next()) {
-				User u = new User(rs.getInt("user_id_fk"));
 				Account a = new Account(rs.getInt("account_id"),
 						rs.getString("account_type"),
 						rs.getDouble("balance"),
 						rs.getString("status"),
-						u);
+						rs.getInt("user_id_fk"));
 				
 				accts.add(a);
 			}
@@ -61,12 +60,11 @@ public class AccountDAO implements AccountDAOImpl {
 			ResultSet rs = stmt.executeQuery(sql);
 			
 			while (rs.next()) {
-				User ua = new User(rs.getInt("user_id_fk"));
 				Account a = new Account(rs.getInt("account_id"),
 						rs.getString("account_type"),
 						rs.getDouble("balance"),
 						rs.getString("status"),
-						ua);
+						rs.getInt("user_id_fk"));
 				
 				accts.add(a);
 			}
@@ -94,12 +92,11 @@ public class AccountDAO implements AccountDAOImpl {
 			ResultSet rs = stmt.executeQuery(sql);
 			
 			while (rs.next()) {
-				User u = new User(rs.getInt("user_id_fk"));
 				Account a = new Account(rs.getInt("account_id"),
 						rs.getString("account_type"),
 						rs.getDouble("balance"),
 						rs.getString("status"),
-						u);
+						rs.getInt("user_id_fk"));
 				
 				accts.add(a);
 			}
@@ -148,12 +145,11 @@ public class AccountDAO implements AccountDAOImpl {
 					+ "VALUES (?, ?, 'pending', ?);"
 					+ "COMMIT;";
 			PreparedStatement stmt = conn.prepareStatement(sql);
-			User u = new User();
 			
 			int index = 0;
 			stmt.setString(++index, a.getType());
 			stmt.setDouble(++index, a.getBalance());
-			stmt.setInt(++index, u.getUserId());
+			stmt.setInt(++index, a.getUserId());
 			
 			stmt.execute();
 			return true;
@@ -290,7 +286,7 @@ public class AccountDAO implements AccountDAOImpl {
 			
 			String sql = "BEGIN TRANSACTION;"
 					+ "INSERT INTO accounts (account_type, balance, status, user_id_fk) "
-					+ "VALUES (?, 0.0, 'pending', ?);"
+					+ "VALUES (?, ?, 'pending', ?);"
 					+ "INSERT INTO users  (user_type, username, pass, first_name, last_name) "
 					+ "VALUES (?, ?, ?, ?, ?)"
 					+ "COMMIT;";
@@ -299,6 +295,7 @@ public class AccountDAO implements AccountDAOImpl {
 			
 			int index = 0;
 			stmt.setString(++index, a.getType());
+			stmt.setDouble(++index, a.getBalance());
 			stmt.setInt(++index, u.getUserId());
 			
 			stmt.setString(++index, u.getUserType());
@@ -314,6 +311,31 @@ public class AccountDAO implements AccountDAOImpl {
 			e.printStackTrace();
 			log.warn("failed to create account with new user!");
 		}
+		return false;
+	}
+
+	@Override
+	public boolean updateAccount(Account a) {
+		
+		try (Connection conn = ConnectUtil.getConnection()) {
+			
+			String sql = "BEGIN TRANSACTION;"
+					+ "UPDATE accounts SET user_id_fk = ? WHERE account_id = ?;"
+					+ "COMMIT;";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			
+			stmt.setInt(1, a.getUserId());
+			stmt.setInt(2, a.getAccountId());
+			
+			stmt.execute();
+			
+			return true;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			log.warn("failed to approve account!");
+		}
+
 		return false;
 	}
 

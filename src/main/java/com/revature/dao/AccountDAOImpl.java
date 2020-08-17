@@ -12,6 +12,8 @@ public interface AccountDAOImpl {
 	public List<Account> findByStatus(String status);
 	public Account findById(int id);
 	public boolean addAccount(Account a);
+	public boolean updateAccount(Account a);
+	
 	public boolean approveAccount(Account a);
 	public boolean denyAccount(Account a);
 	public boolean closeAccount(int id);

@@ -68,3 +68,56 @@ Type: credit
 Current Balance: 3.0
 Owner ID: null]
 2020-08-17 15:09:48 WARN  AccountDAO:186 - failed to approve account!
+2020-08-17 16:19:07 INFO  UserOps:41 - searching for user levvy
+2020-08-17 16:19:08 INFO  Services:59 - Logging user in...
+2020-08-17 16:19:08 INFO  UserOps:46 - searching for user levvy
+2020-08-17 16:19:12 INFO  UserOps:19 - searching for all users...
+2020-08-17 16:19:46 INFO  UserOps:41 - searching for user levvy
+2020-08-17 16:19:47 INFO  Services:59 - Logging user in...
+2020-08-17 16:19:47 INFO  UserOps:46 - searching for user levvy
+2020-08-17 16:19:49 INFO  UserOps:19 - searching for all users...
+2020-08-17 16:19:57 INFO  Account:22 - searching for all accounts...
+2020-08-17 16:20:31 INFO  Account:40 - searching for account id 4...
+2020-08-17 16:20:31 INFO  Services:308 - account found!
+2020-08-17 16:20:31 INFO  Account:40 - searching for account id 4...
+2020-08-17 16:20:41 INFO  Account:75 - updating account: Account #4
+   Type: credit
+    Status: pending
+   Current Balance: 3.0
+   Owner ID: 1
+2020-08-17 16:20:41 INFO  Account:75 - updating account: Account #4
+   Type: credit
+    Status: pending
+   Current Balance: 3.0
+   Owner ID: 1
+2020-08-17 16:22:34 INFO  UserOps:36 - searching for user id 2
+2020-08-17 16:22:34 INFO  Services:483 - user found!
+2020-08-17 16:22:34 INFO  UserOps:36 - searching for user id 2
+2020-08-17 16:22:44 INFO  UserOps:62 - updating user: User #0
+   Type: employee
+   Username: Lev
+   First Name: null
+   Last Name: null
+2020-08-17 16:22:44 INFO  UserOps:62 - updating user: User #0
+   Type: employee
+   Username: Lev
+   First Name: null
+   Last Name: null
+2020-08-17 16:23:36 INFO  UserOps:19 - searching for all users...
+2020-08-17 16:27:38 INFO  UserOps:41 - searching for user levvy
+2020-08-17 16:27:39 INFO  Services:59 - Logging user in...
+2020-08-17 16:27:39 INFO  UserOps:46 - searching for user levvy
+2020-08-17 16:27:44 INFO  UserOps:36 - searching for user id 2
+2020-08-17 16:27:44 INFO  Services:479 - user found!
+2020-08-17 16:27:44 INFO  UserOps:36 - searching for user id 2
+2020-08-17 16:27:51 INFO  UserOps:62 - updating user: User #2
+   Type: employee
+   Username: levki
+   First Name: Lev
+   Last Name: Kim
+2020-08-17 16:27:51 INFO  UserOps:62 - updating user: User #2
+   Type: employee
+   Username: levki
+   First Name: Lev
+   Last Name: Kim
+2020-08-17 16:28:09 INFO  Services:730 - logging user out...

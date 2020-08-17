@@ -42,11 +42,11 @@ public class AccountOps {
 	}
 	
 	public boolean addAccount(Account a) {
-		if (a.getUserId() != null) {
+		if (a.getUserId() != 0) {
 			List<User> list = udao.findAll();
 			boolean b = false;
 			for (User u: list) {
-				if (u.equals(a.getUserId())) {
+				if (u.getUserId() == a.getUserId()) {
 					b = true;
 				}
 			}
@@ -66,6 +66,14 @@ public class AccountOps {
 		
 		log.info("adding account: " + a);
 		if (dao.addAccount(a)) {
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean updateAccount(Account a) {
+		log.info("updating account: " +  a);
+		if (dao.updateAccount(a)) {
 			return true;
 		}
 		return false;
