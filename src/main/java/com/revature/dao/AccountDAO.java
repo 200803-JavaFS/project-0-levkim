@@ -145,13 +145,14 @@ public class AccountDAO implements AccountDAOImpl {
 			
 			String sql = "BEGIN TRANSACTION;"
 					+ "INSERT INTO accounts (account_type, balance, status, user_id_fk) "
-					+ "VALUES (?, 0.0, 'pending', ?);"
+					+ "VALUES (?, ?, 'pending', ?);"
 					+ "COMMIT;";
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			User u = new User();
 			
 			int index = 0;
 			stmt.setString(++index, a.getType());
+			stmt.setDouble(++index, a.getBalance());
 			stmt.setInt(++index, u.getUserId());
 			
 			stmt.execute();

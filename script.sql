@@ -32,6 +32,11 @@ ALTER TABLE users ADD COLUMN update_at TIMESTAMP;
 CREATE TRIGGER set_time BEFORE UPDATE ON users FOR EACH ROW
 EXECUTE PROCEDURE trigger_set_time();
 
+ALTER TABLE accounts ADD COLUMN update_at TIMESTAMP;
+
+CREATE TRIGGER set_time BEFORE UPDATE ON accounts FOR EACH ROW
+EXECUTE PROCEDURE trigger_set_time();
+
 INSERT INTO users (user_type, username, pass, first_name, last_name) 
 VALUES ('admin', 'levkim', '1234pass', 'Lev', 'Kim');
 

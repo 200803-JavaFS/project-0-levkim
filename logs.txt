@@ -7,3 +7,38 @@
 2020-08-16 20:18:08 INFO  UserOps:33 - searching for user levvy
 2020-08-16 20:18:09 INFO  UserMenu:54 - Logging user in...
 2020-08-16 20:18:09 INFO  UserOps:38 - searching for user levvy
+2020-08-17 14:06:50 INFO  UserOps:41 - searching for user levvy
+2020-08-17 14:06:51 INFO  Services:60 - Logging user in...
+2020-08-17 14:06:51 INFO  UserOps:46 - searching for user levvy
+2020-08-17 14:06:53 INFO  Account:22 - searching for all accounts...
+2020-08-17 14:07:19 INFO  UserOps:19 - searching for all users...
+2020-08-17 14:08:04 INFO  UserOps:36 - searching for user id 2
+2020-08-17 14:08:04 INFO  Services:468 - user found!
+2020-08-17 14:08:04 INFO  UserOps:36 - searching for user id 2
+2020-08-17 14:27:00 INFO  UserOps:41 - searching for user levvy
+2020-08-17 14:27:01 INFO  Services:60 - Logging user in...
+2020-08-17 14:27:01 INFO  UserOps:46 - searching for user levvy
+2020-08-17 14:27:04 INFO  Account:22 - searching for all accounts...
+2020-08-17 14:27:14 INFO  UserOps:19 - searching for all users...
+2020-08-17 14:27:40 INFO  UserOps:36 - searching for user id 2
+2020-08-17 14:27:40 INFO  Services:468 - user found!
+2020-08-17 14:27:40 INFO  UserOps:36 - searching for user id 2
+2020-08-17 14:28:35 INFO  UserOps:36 - searching for user id 2
+2020-08-17 14:28:35 INFO  Services:468 - user found!
+2020-08-17 14:28:35 INFO  UserOps:36 - searching for user id 2
+2020-08-17 14:29:11 INFO  UserOps:41 - searching for user levvy
+2020-08-17 14:29:11 INFO  Services:60 - Logging user in...
+2020-08-17 14:29:11 INFO  UserOps:46 - searching for user levvy
+2020-08-17 14:29:17 INFO  UserOps:36 - searching for user id 2
+2020-08-17 14:29:17 INFO  Services:468 - user found!
+2020-08-17 14:29:17 INFO  UserOps:36 - searching for user id 2
+2020-08-17 14:29:26 INFO  UserOps:62 - updating user: User #0 [ 
+Type: customer
+Username: Lev
+First Name: null
+Last Name: null]
+2020-08-17 14:29:27 INFO  UserOps:62 - updating user: User #0 [ 
+Type: customer
+Username: Lev
+First Name: null
+Last Name: null]
