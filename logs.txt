@@ -50,3 +50,21 @@ Last Name: null]
 2020-08-17 14:55:38 INFO  Services:309 - account found!
 2020-08-17 14:55:38 INFO  Account:40 - searching for account id 4...
 2020-08-17 14:55:38 ERROR Services:457 - something went wrong in admin account management
+2020-08-17 15:09:32 INFO  UserOps:41 - searching for user levvy
+2020-08-17 15:09:33 INFO  Services:59 - Logging user in...
+2020-08-17 15:09:33 INFO  UserOps:46 - searching for user levvy
+2020-08-17 15:09:39 INFO  Account:40 - searching for account id 4...
+2020-08-17 15:09:39 INFO  Services:307 - account found!
+2020-08-17 15:09:39 INFO  Account:40 - searching for account id 4...
+2020-08-17 15:09:47 INFO  Account:75 - approving application for account: Account #4 [ 
+Type: credit
+ Status: pending
+Current Balance: 3.0
+Owner ID: null]
+2020-08-17 15:09:47 WARN  AccountDAO:186 - failed to approve account!
+2020-08-17 15:09:47 INFO  Account:75 - approving application for account: Account #4 [ 
+Type: credit
+ Status: pending
+Current Balance: 3.0
+Owner ID: null]
+2020-08-17 15:09:48 WARN  AccountDAO:186 - failed to approve account!
