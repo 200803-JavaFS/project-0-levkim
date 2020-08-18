@@ -274,6 +274,8 @@ public class Services {
 		System.out.println("[U] See all users");
 		System.out.println("[O] Find one account");
 		System.out.println("[S] Find one user ");
+		System.out.println("[C] Add account");
+		System.out.println("[R] Add user");
 		System.out.println("[X] Exit ");
 		String choice = scan.nextLine();
 		
@@ -588,6 +590,67 @@ public class Services {
 				}
 			} catch (Exception e) {
 				log.error("something went wrong in admin user management");
+				e.printStackTrace();
+			}
+			admin();
+			break;
+		case "C":
+			try {
+				System.out.println("Would you like a 'checking' account, or a 'savings' account?");
+				String type = scan.nextLine();
+				System.out.println("How much would you like to deposit in this account?");
+				double balance = scan.nextDouble();
+				scan.nextLine(); 
+				System.out.println("Input the id of the user who will own this account.");
+				int userId = scan.nextInt();
+				scan.nextLine();
+				Account a = new Account(type, balance, userId);
+				
+				log.info("creating account...");
+				
+				if (acctOps.addAccount(a)) {
+					System.out.println("Successfully created new account!");
+					System.out.println("This account must be approved before it can be used.");
+				} else {
+					log.warn("somethign went wrong in the creation of account.");
+				}
+			} catch (Exception e) {
+				log.error("error occurred during account creation from admin!");
+				e.printStackTrace();
+			}
+			admin();
+			break;
+			
+		case "R":
+			try {
+				System.out.println("Please choose user type.");
+				System.out.println("input 'customer' to make this user a customer.");
+				System.out.println("input 'employee' to make this user an employee.");
+				System.out.println("input 'admin' to make this user an admin.");
+				String userType = scan.nextLine();
+				userType = userType.toLowerCase();
+				System.out.println("Please choose a new username.");
+				String user = scan.nextLine();
+				System.out.println("Please choose a new password.");
+				String pass = scan.nextLine();
+				System.out.println("Please input your first name.");
+				String fname = scan.nextLine();
+				System.out.println("Please input your last name.");
+				String lname = scan.nextLine();
+	
+				log.info("creating new user...");
+				User us = new User(userType, user, pass, fname, lname);
+				if (userOps.findByUser(user) == null) {
+					userOps.addUser(us);
+					System.out.println("User successfully created!");
+					System.out.println(us);
+				} else {
+					System.out.println("Someone has already used that username. Please try a different one.");
+					admin();
+					break;
+				}
+			} catch (Exception e) {
+				log.error("something went wrong with creating new user from admin!");
 				e.printStackTrace();
 			}
 			admin();

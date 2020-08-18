@@ -7,15 +7,12 @@ import org.apache.logging.log4j.Logger;
 
 import com.revature.dao.AccountDAO;
 import com.revature.dao.AccountDAOImpl;
-import com.revature.dao.UserDAO;
-import com.revature.dao.UserDAOImpl;
 import com.revature.models.Account;
 import com.revature.models.User;
 
 public class AccountOps {
 	
 	private static AccountDAOImpl dao = new AccountDAO();
-	private static UserDAOImpl udao = new UserDAO();
 	private static final Logger log = LogManager.getLogger(Account.class);
 	
 	public List<Account> findAll() {
@@ -42,28 +39,6 @@ public class AccountOps {
 	}
 	
 	public boolean addAccount(Account a) {
-		if (a.getUserId() != 0) {
-			List<User> list = udao.findAll();
-			boolean b = false;
-			for (User u: list) {
-				if (u.getUserId() == a.getUserId()) {
-					b = true;
-				}
-			}
-			if (b) {
-				log.info("adding account: " + a);
-				if (dao.addAccount(a)) {
-					return true;
-				}
-			} else {
-				log.info("adding account: " + a + " with new user: " + a.getUserId());
-				if (dao.addAccountWithUser(a)) {
-					return true;
-				}
-				return false;
-			}
-		}
-		
 		log.info("adding account: " + a);
 		if (dao.addAccount(a)) {
 			return true;

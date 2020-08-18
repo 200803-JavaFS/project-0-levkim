@@ -17,7 +17,6 @@ public interface AccountDAOImpl {
 	public boolean approveAccount(Account a);
 	public boolean denyAccount(Account a);
 	public boolean closeAccount(int id);
-	public boolean addAccountWithUser(Account a);
 	
 	public boolean updateFunds(double fund, int id);
 	public boolean transferFunds(int original, int target, double fund);

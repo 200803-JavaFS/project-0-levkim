@@ -276,40 +276,6 @@ public class AccountDAO implements AccountDAOImpl {
 	}
 
 	@Override
-	public boolean addAccountWithUser(Account a) {
-		try (Connection conn = ConnectUtil.getConnection()) {
-			
-			String sql = "BEGIN;"
-					+ "INSERT INTO accounts (account_type, balance, status, user_id_fk) "
-					+ "VALUES (?, ?, 'pending', ?);"
-					+ "INSERT INTO users  (user_type, username, pass, first_name, last_name) "
-					+ "VALUES (?, ?, ?, ?, ?)"
-					+ "COMMIT;";
-			PreparedStatement stmt = conn.prepareStatement(sql);
-			User u = new User();
-			
-			int index = 0;
-			stmt.setString(++index, a.getType());
-			stmt.setDouble(++index, a.getBalance());
-			stmt.setInt(++index, u.getUserId());
-			
-			stmt.setString(++index, u.getUserType());
-			stmt.setString(++index, u.getUser());
-			stmt.setString(++index, u.getPass());
-			stmt.setString(++index, u.getFname());
-			stmt.setString(++index, u.getLname());
-			
-			stmt.execute();
-			return true;
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-			log.warn("failed to create account with new user!");
-		}
-		return false;
-	}
-
-	@Override
 	public boolean updateAccount(Account a) {
 		
 		try (Connection conn = ConnectUtil.getConnection()) {

@@ -62,6 +62,12 @@ public class User implements Serializable {
 		this.lname = lname;
 	}
 
+	public User(String userType, String user, String pass, String fname, String lname) {
+		this(userType, user, pass);
+		this.fname = fname;
+		this.lname = lname;
+	}
+
 	public int getUserId() {
 		return userId;
 	}
