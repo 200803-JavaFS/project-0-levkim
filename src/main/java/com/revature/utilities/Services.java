@@ -199,7 +199,7 @@ public class Services {
 				scan.nextLine();
 				
 				log.info("withdrawing from account " + acctId + " with " + take);
-				a = acctOps.findById(acctId);
+				Account a = acctOps.findById(acctId);
 				double oldbal = a.getBalance();
 				double newbal = oldbal - take;
 				
@@ -306,7 +306,7 @@ public class Services {
 				scan.nextLine();
 				if (acctOps.findById(acctId) != null) {
 					log.info("account found!");
-					a = acctOps.findById(acctId);
+					Account a = acctOps.findById(acctId);
 					System.out.println(a);
 					
 					System.out.println("what would you like to do with this account?");
@@ -477,8 +477,8 @@ public class Services {
 				scan.nextLine();
 				if (userOps.findById(userId) != null) {
 					log.info("user found!");
-					u = userOps.findById(userId);
-					System.out.println(u);
+					User user = userOps.findById(userId);
+					System.out.println(user);
 					
 					// this menu should affect the user specified from above
 					
@@ -505,14 +505,14 @@ public class Services {
 							String userType = scan.nextLine();
 							userType = userType.toLowerCase();
 							
-							u.setUserType(userType);
-							u.getFname();
-							u.getLname();
+							user.setUserType(userType);
+							user.getFname();
+							user.getLname();
 							
-							userOps.updateUser(u);
-							if (userOps.updateUser(u)) {
+							userOps.updateUser(user);
+							if (userOps.updateUser(user)) {
 								System.out.println("successfully updated user type!");
-								System.out.println(u);
+								System.out.println(user);
 							} else {
 								log.warn("something went wrong while updating user type.");
 							}
@@ -522,14 +522,14 @@ public class Services {
 							System.out.println("What would you like to change the user's first name to?");
 							String uFname = scan.nextLine();
 							
-							u.getUserType();
-							u.setFname(uFname);
-							u.getLname();
+							user.getUserType();
+							user.setFname(uFname);
+							user.getLname();
 							
-							userOps.updateUser(u);
-							if (userOps.updateUser(u)) {
+							userOps.updateUser(user);
+							if (userOps.updateUser(user)) {
 								System.out.println("successfully updated user's first name!");
-								System.out.println(u);
+								System.out.println(user);
 							} else {
 								log.warn("something went wrong while updating user's first name.");
 							}
@@ -539,14 +539,14 @@ public class Services {
 							System.out.println("What would you like to change the user's last name to?");
 							String uLname = scan.nextLine();
 							
-							u.getUserType();
-							u.getFname();
-							u.setLname(uLname);
+							user.getUserType();
+							user.getFname();
+							user.setLname(uLname);
 							
-							userOps.updateUser(u);
-							if (userOps.updateUser(u)) {
+							userOps.updateUser(user);
+							if (userOps.updateUser(user)) {
 								System.out.println("successfully updated user's last name!");
-								System.out.println(u);
+								System.out.println(user);
 							} else {
 								log.warn("something went wrong while updating user's last name.");
 							}
@@ -563,8 +563,8 @@ public class Services {
 						confirm = confirm.toLowerCase();
 						
 						if (a != null && confirm.equals("yes")) {
-							userOps.deleteUser(u.getUserId());
-							if (userOps.deleteUser(u.getUserId())) {
+							userOps.deleteUser(user.getUserId());
+							if (userOps.deleteUser(user.getUserId())) {
 								System.out.println("user successfully deleted.");
 							} else {
 								log.warn("something went wrong with deleting the user.");
@@ -641,7 +641,7 @@ public class Services {
 				scan.nextLine();
 				if (acctOps.findById(acctId) != null) {
 					log.info("account found!");
-					a = acctOps.findById(acctId);
+					Account a = acctOps.findById(acctId);
 					System.out.println(a);
 					
 					// this menu should affect the account specified from above
@@ -696,8 +696,8 @@ public class Services {
 				scan.nextLine();
 				if (userOps.findById(userId) != null) {
 					log.info("user found!");
-					u = userOps.findById(userId);
-					System.out.println(u);
+					User user = userOps.findById(userId);
+					System.out.println(user);
 				} else {
 					log.warn("user does not exist!");
 					System.out.println("Check your spelling and try again.");

@@ -124,7 +124,8 @@ public class AccountDAO implements AccountDAOImpl {
 				Account a = new Account(rs.getInt("account_id"),
 						rs.getString("account_type"),
 						rs.getDouble("balance"),
-						rs.getString("status"));
+						rs.getString("status"),
+						rs.getInt("user_id_fk"));
 				return a;
 			}
 			
@@ -140,7 +141,7 @@ public class AccountDAO implements AccountDAOImpl {
 	public boolean addAccount(Account a) {
 		try (Connection conn = ConnectUtil.getConnection()) {
 			
-			String sql = "BEGIN TRANSACTION;"
+			String sql = "BEGIN;"
 					+ "INSERT INTO accounts (account_type, balance, status, user_id_fk) "
 					+ "VALUES (?, ?, 'pending', ?);"
 					+ "COMMIT;";
@@ -166,9 +167,7 @@ public class AccountDAO implements AccountDAOImpl {
 
 		try (Connection conn = ConnectUtil.getConnection()) {
 			
-			String sql = "BEGIN TRANSACTION;"
-					+ "UPDATE accounts SET status = 'open' WHERE account_id = ?;"
-					+ "COMMIT;";
+			String sql = "UPDATE accounts SET status = 'open' WHERE account_id = ?;";
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			
 			stmt.setInt(1, a.getAccountId());
@@ -190,9 +189,7 @@ public class AccountDAO implements AccountDAOImpl {
 		
 		try (Connection conn = ConnectUtil.getConnection()) {
 			
-			String sql = "BEGIN TRANSACTION;"
-					+ "UPDATE accounts SET status = 'denied' WHERE account_id = ?;"
-					+ "COMMIT;";
+			String sql = "UPDATE accounts SET status = 'denied' WHERE account_id = ?;";
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			
 			stmt.setInt(1, a.getAccountId());
@@ -214,9 +211,7 @@ public class AccountDAO implements AccountDAOImpl {
 		
 		try (Connection conn = ConnectUtil.getConnection()) {
 			
-			String sql = "BEGIN TRANSACTION;"
-					+ "UPDATE accounts SET status = 'closed' WHERE account_id = " + id + ";"
-					+ "COMMIT;";
+			String sql = "UPDATE accounts SET status = 'closed' WHERE account_id = " + id + ";";
 			Statement stmt = conn.createStatement();
 			stmt.execute(sql);
 			return true;
@@ -284,7 +279,7 @@ public class AccountDAO implements AccountDAOImpl {
 	public boolean addAccountWithUser(Account a) {
 		try (Connection conn = ConnectUtil.getConnection()) {
 			
-			String sql = "BEGIN TRANSACTION;"
+			String sql = "BEGIN;"
 					+ "INSERT INTO accounts (account_type, balance, status, user_id_fk) "
 					+ "VALUES (?, ?, 'pending', ?);"
 					+ "INSERT INTO users  (user_type, username, pass, first_name, last_name) "
@@ -319,7 +314,7 @@ public class AccountDAO implements AccountDAOImpl {
 		
 		try (Connection conn = ConnectUtil.getConnection()) {
 			
-			String sql = "BEGIN TRANSACTION;"
+			String sql = "BEGIN;"
 					+ "UPDATE accounts SET user_id_fk = ? WHERE account_id = ?;"
 					+ "COMMIT;";
 			PreparedStatement stmt = conn.prepareStatement(sql);
