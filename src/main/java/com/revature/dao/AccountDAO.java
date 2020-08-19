@@ -54,7 +54,7 @@ public class AccountDAO implements AccountDAOImpl {
 		
 		try (Connection conn = ConnectUtil.getConnection()) {
 			
-			String sql = "SELECT * FROM accounts WHERE user_id_fk =" + u.getUserId() + ";";
+			String sql = "SELECT * FROM accounts WHERE user_id_fk = " + u.getUserId() + ";";
 			Statement stmt = conn.createStatement();
 			List<Account> accts = new ArrayList<>(); 
 			ResultSet rs = stmt.executeQuery(sql);
@@ -86,7 +86,7 @@ public class AccountDAO implements AccountDAOImpl {
 		
 		try (Connection conn = ConnectUtil.getConnection()) {
 			
-			String sql = "SELECT * FROM accounts WHERE status =" + status + ";";
+			String sql = "SELECT * FROM accounts WHERE status = " + status + ";";
 			Statement stmt = conn.createStatement();
 			List<Account> accts = new ArrayList<>(); 
 			ResultSet rs = stmt.executeQuery(sql);
@@ -116,7 +116,7 @@ public class AccountDAO implements AccountDAOImpl {
 		
 		try (Connection conn = ConnectUtil.getConnection()) {
 			
-			String sql = "SELECT * FROM accounts WHERE account_id =" + id + ";";
+			String sql = "SELECT * FROM accounts WHERE account_id = " + id + ";";
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);
 			

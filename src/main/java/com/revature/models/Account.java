@@ -136,10 +136,8 @@ public class Account implements Serializable {
 		return "Account #" + accountId + "\n"
 				+ "   Type: " + type + "\n"
 				+ "   Status: " + status + "\n"
-				+ "   Current Balance: " + balance + "\n"
+				+ "   Balance: " + balance + "\n"
 				+ "   Owner ID: " + userId;
 	}
 	
-	
-
 }

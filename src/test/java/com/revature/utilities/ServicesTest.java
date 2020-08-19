@@ -21,4 +21,14 @@ public class ServicesTest {
 		fail("Not yet implemented");
 	}
 
+	@Test
+	public void testCustPrompt() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testCustSwitch() {
+		fail("Not yet implemented");
+	}
+
 }

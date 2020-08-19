@@ -1,7 +1,6 @@
 package com.revature.models;
 
 import java.io.Serializable;
-import java.util.List;
 
 public class User implements Serializable {
 	
@@ -13,7 +12,6 @@ public class User implements Serializable {
 	private String pass;
 	private String fname;
 	private String lname;
-	private List<Account> accounts;
 
 	public User() {
 		super();
@@ -114,14 +112,6 @@ public class User implements Serializable {
 
 	public void setLname(String lname) {
 		this.lname = lname;
-	}
-
-	public List<Account> getAccounts() {
-		return accounts;
-	}
-
-	public void setAccounts(List<Account> accounts) {
-		this.accounts = accounts;
 	}
 
 	@Override

@@ -18,7 +18,24 @@ public class Services {
 	public User u;
 	public Account a;
 	
-	public void prompt() {
+	public void welcome() {
+		System.out.println("WHALEcome to Beluga Bank, where banking is a splash!");
+		System.out.println("               __   __\r\n" + 
+					"              __ \\ / __\r\n" + 
+					"             /  \\ | /  \\\r\n" + 
+					"                 \\|/\r\n" + 
+					"            _,.---v---._\r\n" + 
+					"   /\\__/\\  /            \\\r\n" + 
+					"   \\_  _/ /              \\\r\n" + 
+					"     \\ \\_|           @ __|\r\n" + 
+					"  hjw \\                \\_\r\n" + 
+					"  `97  \\     ,__/       /\r\n" + 
+					"     ~~~`~~~~~~~~~~~~~~/~~~~");
+		
+		prompt();
+	}
+	
+	private void prompt() {
 		System.out.println("Hello! Are you a returning customer, or a new user?");
 		System.out.println("[L] Returning customer ");
 		System.out.println("[N] New user");
@@ -47,7 +64,7 @@ public class Services {
 		}
 	}
 
-	public void login() {
+	private void login() {
 		System.out.println("Please login.");
 		System.out.println("Input your username:");
 		String user = scan.nextLine();
@@ -73,7 +90,7 @@ public class Services {
 		
 	}
 
-	public void register() {
+	private void register() {
 		System.out.println("Hi, new user!");
 		System.out.println("Please choose a new username.");
 		String user = scan.nextLine();
@@ -100,7 +117,7 @@ public class Services {
 		
 	}
 	
-	public void custPrompt() {
+	private void custPrompt() {
 		System.out.println("What would you like to do today?");
 		System.out.println("[A] See all accounts");
 		System.out.println("[C] Create new account");
@@ -113,14 +130,18 @@ public class Services {
 		custSwitch(choice);
 	}
 	
-	public void custSwitch(String choice) {
+	private void custSwitch(String choice) {
 		choice = choice.toUpperCase();
 		
 		switch (choice) {
 		case "A":
-			List<Account> accts = acctOps.findByUser(u);
-			for (Account a : accts) {
-				System.out.println(a);
+			if (acctOps.findByUser(u) != null) {
+				List<Account> accts = acctOps.findByUser(u);
+				for (Account a : accts) {
+					System.out.println(a);
+				}
+			} else {
+				System.out.println("No accounts were found!");
 			}
 			custPrompt();
 			break;
@@ -137,7 +158,7 @@ public class Services {
 				
 				if (acctOps.addAccount(a)) {
 					System.out.println("Successfully created new account!");
-					System.out.println("please wait for an admin to approve your account to being using your new account.");
+					System.out.println("please wait for an admin to approve your account to use your new account.");
 				} else {
 					log.warn("somethign went wrong in the creation of account.");
 				}
@@ -145,6 +166,7 @@ public class Services {
 				log.error("error occurred during account creation!");
 				e.printStackTrace();
 			}
+			custPrompt();
 			break;
 		case "D":
 			try {
@@ -316,7 +338,7 @@ public class Services {
 						System.out.println("[A] Approve account");
 						System.out.println("[D] Deny account");
 					} 
-					System.out.println("[S] Update owner of account");
+					System.out.println("[O] Update owner of account");
 					System.out.println("[U] Update balance");
 					System.out.println("[T] Transfer balance");
 					System.out.println("[C] Close account");
@@ -344,7 +366,7 @@ public class Services {
 						}
 						admin();
 						break;
-					case "S":
+					case "O":
 						System.out.println("Input the id of the user you would like to attach this account to.");
 						int user = scan.nextInt();
 						scan.nextLine();
@@ -605,6 +627,8 @@ public class Services {
 				int userId = scan.nextInt();
 				scan.nextLine();
 				Account a = new Account(type, balance, userId);
+				a.getAccountId();
+				a.getStatus();
 				
 				log.info("creating account...");
 				
@@ -791,8 +815,8 @@ public class Services {
 		
 		if (confirm.equals("Y")) {
 			log.info("logging user out...");
-			System.out.println("Thank you for visiting the Beluga Bank! Happy swimming! :)");
-			login();
+			System.out.println("Thanks for diving with us at the Beluga Bank! Sea you later! :)");
+			welcome();
 		} else if (confirm.equals("N")) {
 			System.out.println("Sending you back to the previous menu...");
 			if (u.getUserType().equals("admin")) {
@@ -807,5 +831,5 @@ public class Services {
 			logout();
 		}
 	}
-
+	
 }

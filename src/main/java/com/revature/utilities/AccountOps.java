@@ -22,7 +22,7 @@ public class AccountOps {
 	}
 	
 	public List<Account> findByUser(User u) {
-		log.info("searching for all accounts with user id " + u + "...");
+		log.info("searching for all accounts with user id " + u.getUserId() + "...");
 		List<Account> list = dao.findByUser(u);
 		return list;
 	}
@@ -39,7 +39,7 @@ public class AccountOps {
 	}
 	
 	public boolean addAccount(Account a) {
-		log.info("adding account: " + a);
+		log.info("adding account: " + a.getAccountId());
 		if (dao.addAccount(a)) {
 			return true;
 		}
@@ -47,7 +47,7 @@ public class AccountOps {
 	}
 	
 	public boolean updateAccount(Account a) {
-		log.info("updating account: " +  a);
+		log.info("updating account: " +  a.getAccountId());
 		if (dao.updateAccount(a)) {
 			return true;
 		}
@@ -55,7 +55,7 @@ public class AccountOps {
 	}
 	
 	public boolean approveAccount(Account a) {
-		log.info("approving application for account: " +  a);
+		log.info("approving application for account: " +  a.getAccountId());
 		if (dao.approveAccount(a)) {
 			return true;
 		}
@@ -63,7 +63,7 @@ public class AccountOps {
 	}
 	
 	public boolean denyAccount(Account a) {
-		log.info("denying application for account: " +  a);
+		log.info("denying application for account: " +  a.getAccountId());
 		if (dao.denyAccount(a)) {
 			return true;
 		}

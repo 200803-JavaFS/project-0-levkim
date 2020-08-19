@@ -244,7 +244,7 @@ public class UserDAO implements UserDAOImpl {
 	public List<Account> findAccounts(Account a) {
 		try (Connection conn = ConnectUtil.getConnection()) {
 			
-			String sql = "SELECT * FROM accounts WHERE user_id_fk =" + a.getUserId() + ";";
+			String sql = "SELECT * FROM accounts WHERE user_id_fk = " + a.getUserId() + ";";
 			Statement stmt = conn.createStatement();
 			List<Account> accts = new ArrayList<>(); 
 			ResultSet rs = stmt.executeQuery(sql);
